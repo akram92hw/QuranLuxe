@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quran Luxe - Le Saint Coran</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-dark: #121826;
+            --secondary-dark: #1a2238;
+            --primary-blue: #2d3748;
+            --accent-blue: #4a5568;
+            --light-blue: #5d6b82;
+            --gold: #d4af37;
+            --light-gold: #f4e4a6;
+            --white: #ffffff;
+            --light-gray: #f7fafc;
+            --text-color: #e2e8f0;
+            --green-highlight: #48bb78;
+            --error-red: #f56565;
+            --success-green: #48bb78;
+            --arabic-font: 'Noto Naskh Arabic', 'Amiri', serif;
+            --french-font: 'Poppins', sans-serif;
+        }
+
+        body {
+            font-family: var(--french-font);
+            background-color: var(--primary-dark);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+            direction: ltr;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-blue) 100%);
+            padding: 20px 0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--accent-blue);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            cursor: pointer;
+        }
+
+        .logo i {
+            font-size: 2.5rem;
+            color: var(--gold);
+        }
+
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--white);
+            font-family: var(--arabic-font);
+        }
+
+        .logo-text span {
+            color: var(--gold);
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .user-info {
+            display: none;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 15px;
+            background-color: rgba(212, 175, 55, 0.15);
+            border-radius: 8px;
+            cursor: pointer;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .user-info i {
+            color: var(--gold);
+        }
+
+        .username {
+            color: var(--white);
+            font-weight: 500;
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .auth-btn {
+            padding: 8px 20px;
+            border-radius: 8px;
+            border: none;
+            font-family: var(--french-font);
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .login-btn {
+            background-color: transparent;
+            color: var(--white);
+            border: 1px solid var(--gold);
+        }
+
+        .login-btn:hover {
+            background-color: rgba(212, 175, 55, 0.1);
+        }
+
+        .signup-btn {
+            background-color: var(--gold);
+            color: var(--primary-dark);
+        }
+
+        .signup-btn:hover {
+            background-color: var(--light-gold);
+            transform: translateY(-2px);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 8px 15px;
+            border-radius: 5px;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--gold);
+            background-color: rgba(212, 175, 55, 0.1);
+        }
+
+        main {
+            min-height: calc(100vh - 160px);
+            padding: 30px 0;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(rgba(18, 24, 38, 0.9), rgba(45, 55, 72, 0.9)), url('https://images.unsplash.com/photo-1511377107391-116a9d5e5989?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            border-radius: 15px;
+            margin-bottom: 50px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--accent-blue);
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: var(--white);
+            font-family: var(--arabic-font);
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            color: var(--light-gold);
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .option-card {
+            background-color: var(--secondary-dark);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid var(--accent-blue);
+            cursor: pointer;
+        }
+
+        .option-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            border-color: var(--gold);
+            background-color: var(--primary-blue);
+        }
+
+        .option-card i {
+            font-size: 3.5rem;
+            color: var(--gold);
+            margin-bottom: 20px;
+        }
+
+        .option-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: var(--white);
+        }
+
+        .option-card p {
+            color: var(--text-color);
+            font-size: 1.1rem;
+        }
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal {
+            background-color: var(--secondary-dark);
+            border-radius: 15px;
+            width: 100%;
+            max-width: 500px;
+            padding: 40px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+            border: 1px solid var(--accent-blue);
+            position: relative;
+        }
+
+        .modal-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .modal-header h2 {
+            color: var(--white);
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .modal-header p {
+            color: var(--light-gold);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .close-modal:hover {
+            color: var(--gold);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--light-gold);
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 15px;
+            background-color: var(--primary-dark);
+            border: 1px solid var(--accent-blue);
+            border-radius: 8px;
+            color: var(--text-color);
+            font-size: 1rem;
+            font-family: var(--french-font);
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2);
+        }
+
+        .form-error {
+            color: var(--error-red);
+            font-size: 0.9rem;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .form-success {
+            color: var(--success-green);
+            font-size: 0.9rem;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .modal-btn {
+            width: 100%;
+            padding: 15px;
+            background-color: var(--gold);
+            color: var(--primary-dark);
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 10px;
+        }
+
+        .modal-btn:hover {
+            background-color: var(--light-gold);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        .switch-form {
+            text-align: center;
+            margin-top: 20px;
+            color: var(--text-color);
+        }
+
+        .switch-form a {
+            color: var(--gold);
+            text-decoration: none;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .switch-form a:hover {
+            text-decoration: underline;
+        }
+
+        .selection-page {
+            display: none;
+        }
+
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--accent-blue);
+        }
+
+        .page-header h2 {
+            font-size: 2.2rem;
+            color: var(--white);
+            font-family: var(--arabic-font);
+        }
+
+        .back-button {
+            background-color: var(--accent-blue);
+            color: var(--white);
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-family: var(--french-font);
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border: 1px solid var(--light-blue);
+        }
+
+        .back-button:hover {
+            background-color: var(--light-blue);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(74, 85, 104, 0.3);
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 15px;
+            background-color: var(--secondary-dark);
+            border: 1px solid var(--accent-blue);
+            border-radius: 10px;
+            color: var(--text-color);
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+        }
+
+        .search-box:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2);
+        }
+
+        .selection-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            max-height: 600px;
+            overflow-y: auto;
+            padding: 10px;
+        }
+
+        .selection-item {
+            background-color: var(--secondary-dark);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 1px solid var(--accent-blue);
+        }
+
+        .selection-item:hover {
+            background-color: var(--primary-blue);
+            transform: scale(1.03);
+            border-color: var(--gold);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .selection-item.active {
+            background-color: var(--accent-blue);
+            border-color: var(--gold);
+        }
+
+        .selection-number {
+            display: inline-block;
+            background-color: var(--gold);
+            color: var(--primary-dark);
+            width: 35px;
+            height: 35px;
+            line-height: 35px;
+            border-radius: 50%;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .selection-name {
+            font-size: 1.3rem;
+            color: var(--white);
+            font-family: var(--arabic-font);
+            margin-bottom: 5px;
+        }
+
+        .selection-meta {
+            font-size: 0.9rem;
+            color: var(--light-gold);
+        }
+
+        .quran-reader {
+            display: none;
+        }
+
+        .reader-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .surah-info {
+            text-align: center;
+            background-color: var(--secondary-dark);
+            padding: 20px;
+            border-radius: 10px;
+            flex-grow: 1;
+            border: 1px solid var(--accent-blue);
+        }
+
+        .surah-info h2 {
+            font-size: 2rem;
+            color: var(--white);
+            font-family: var(--arabic-font);
+            margin-bottom: 10px;
+        }
+
+        .surah-info p {
+            color: var(--light-gold);
+        }
+
+        .audio-controls {
+            background-color: var(--secondary-dark);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            border: 1px solid var(--accent-blue);
+        }
+
+        .reciter-select {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .reciter-select label {
+            font-size: 1.1rem;
+            color: var(--light-gold);
+        }
+
+        .reciter-select select {
+            background-color: var(--primary-dark);
+            color: var(--text-color);
+            border: 1px solid var(--accent-blue);
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-size: 1rem;
+            flex-grow: 1;
+            cursor: pointer;
+        }
+
+        .reciter-select select:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+
+        .player {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .player button {
+            background-color: var(--gold);
+            color: var(--primary-dark);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(212, 175, 55, 0.5);
+        }
+
+        .player button:hover {
+            background-color: var(--light-gold);
+            transform: scale(1.1);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        .progress-container {
+            flex-grow: 1;
+            background-color: var(--primary-dark);
+            height: 8px;
+            border-radius: 4px;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            border: 1px solid var(--accent-blue);
+        }
+
+        .progress-bar {
+            height: 100%;
+            background-color: var(--green-highlight);
+            width: 0%;
+            transition: width 0.1s;
+        }
+
+        .time-display {
+            color: var(--light-gold);
+            font-size: 1rem;
+            min-width: 100px;
+            text-align: center;
+        }
+
+        .ayat-container {
+            background-color: var(--secondary-dark);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border: 1px solid var(--accent-blue);
+            max-height: 600px;
+            overflow-y: auto;
+        }
+
+        .ayat-item {
+            padding: 25px 0;
+            border-bottom: 1px solid var(--accent-blue);
+            transition: background-color 0.3s;
+            position: relative;
+        }
+
+        .ayat-item:last-child {
+            border-bottom: none;
+        }
+
+        .ayat-item.active {
+            background-color: rgba(72, 187, 120, 0.1);
+        }
+
+        .ayat-number {
+            display: inline-block;
+            background-color: var(--gold);
+            color: var(--primary-dark);
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            border-radius: 50%;
+            font-weight: bold;
+            margin-left: 15px;
+            font-family: var(--arabic-font);
+            border: 1px solid rgba(212, 175, 55, 0.5);
+        }
+
+        .ayat-arabic {
+            font-size: 2.2rem;
+            text-align: right;
+            color: var(--white);
+            font-family: var(--arabic-font);
+            line-height: 1.8;
+            margin: 20px 0;
+            padding: 10px 0;
+            border-right: 3px solid transparent;
+            transition: border-color 0.3s;
+            direction: rtl;
+        }
+
+        .ayat-arabic.highlight {
+            border-right-color: var(--green-highlight);
+            background-color: rgba(72, 187, 120, 0.1);
+            padding-right: 10px;
+        }
+
+        .ayat-translation {
+            font-size: 1.3rem;
+            color: var(--light-gold);
+            text-align: left;
+            font-family: var(--french-font);
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid var(--accent-blue);
+            line-height: 1.7;
+            direction: ltr;
+        }
+
+        footer {
+            background-color: var(--secondary-dark);
+            padding: 30px 0;
+            text-align: center;
+            border-top: 1px solid var(--accent-blue);
+            margin-top: 50px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .footer-logo {
+            font-size: 2rem;
+            color: var(--white);
+            font-family: var(--arabic-font);
+            margin-bottom: 20px;
+            cursor: pointer;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: color 0.3s;
+            cursor: pointer;
+        }
+
+        .footer-links a:hover {
+            color: var(--gold);
+        }
+
+        .copyright {
+            color: var(--light-gold);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            nav ul {
+                gap: 15px;
+            }
+            
+            .options-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            }
+
+            .selection-grid {
+                grid-template-c
